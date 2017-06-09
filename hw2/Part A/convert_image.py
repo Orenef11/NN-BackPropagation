@@ -32,7 +32,6 @@ class ImageConvert(object):
     def reduce_and_change_color_from_source_folder(self, image_color):
         for src_image_path, des_image_path in zip(self.__source_images_path_list, self.__des_images_path_list):
             image_obj = Image.open(src_image_path).convert(image_color)
-            print(image_obj.size)
             image_obj = image_obj.resize(IMAGE_SHAPE, Image.ANTIALIAS)
             image_obj.save(des_image_path, optimize=True, quality=95)
 
@@ -44,35 +43,35 @@ class ImageConvert(object):
             with Image.open(des_image_path) as img:
                 source_image_shape = img.size
 
-            rows_size = int(source_image_shape[0] / sub_image_shape[0])
+            # # Testing
+            # source_image_shape = IMAGE_SHAPE
+            # image_lines_list = []
+            # rows_size = source_image_shape[0]
+            # for i in range(0, rows_size):
+            #     image_lines_list.append([])
+            #     for j in range(1, IMAGE_SHAPE[1] + 1):
+            #         image_lines_list[-1].append(i * rows_size + j)
+
             cols_size = int(source_image_shape[1] / sub_image_shape[1])
             row_start_idx = source_image_shape[0] - cols_size * sub_image_shape[0]
             col_start_idx = source_image_shape[1] - cols_size * sub_image_shape[1]
-            rows_size, cols_size = int(rows_size), int(cols_size)
-            print(row_start_idx, col_start_idx, rows_size, cols_size)
-            line_image_list = imread(des_image_path).tolist()
+            image_lines_list = imread(des_image_path).tolist()
             file_idx = 1
-            if row_start_idx > 0:
-                row_start_idx -= 1
-            if col_start_idx > 0:
-                col_start_idx -= 1
+
             image_folder_path = path.join(folder_path, path.split(des_image_path)[1].split('.')[0])
             if path.isdir(image_folder_path):
                 rmtree(image_folder_path)
-                sleep(1)
+                # sleep(1)
             makedirs(image_folder_path)
             for i in range(row_start_idx, source_image_shape[0] - 1, sub_image_shape[0]):
                 for j in range(col_start_idx, source_image_shape[1] - 1, sub_image_shape[1]):
-                    with open(path.join(image_folder_path, str(file_idx) + '.txt'), 'w') as f:
+                    file_path = path.join(image_folder_path, str(file_idx) + '.txt')
+                    with open(file_path, 'w') as f:
                         for row_idx in range(i, i + sub_image_shape[0]):
-                            for col_idx in range(j, j + sub_image_shape[1]):
-                                line = list(map(str, line_image_list[row_idx][col_idx: col_idx + sub_image_shape[1]]))
-                                f.write('\t'.join(line) + '\n')
-
-                        print(file_idx)
+                            line = list(map(str, image_lines_list[row_idx][j: j + sub_image_shape[1]]))
+                            f.write('\t'.join(line) + '\n')
+                    print("Create '{}' file".format(file_path))
                     file_idx += 1
-
-            print(file_idx)
 
 
 def read_sub_images_file(image_folder_path):
@@ -93,8 +92,9 @@ def main():
 
 
     # Contains in each row the sub-picture derived from the big picture.
-    # image_list = read_sub_images_file(r'Images - output\Lena images\lena')
-    # print(image_list)
+    image_path = path.join(path.join(SUB_IMAGES_FOLDER, 'Lena'), 'Lena')
+    image_list = read_sub_images_file(image_path)
+    print(image_list)
 
 if __name__ == "__main__":
     main()

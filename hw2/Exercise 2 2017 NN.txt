@@ -1,0 +1,39 @@
+Homework No II   (You may work in groups of two or three.)  Due June 19 (midnight);   No additional penalty between June 20 - 23 (prior to Moed A).   Five point penalty until June 28.  Ten point penalty after June 28.   Not accepted after July 10. 
+
+You have to prepare a written report with all your results, etc as you did in project I.
+
+Part A)   
+
+Download a picture of "Lenna"  of 256 x 256 grey-value pixels.   An easy representation is .pgm (its in ascii) but anyway you can handle it is OK.   Implement a feed forward neural network with a
+"bottleneck" that produces a filter of Lenna.   Your data should be sub-pictures of Lenna of 30 x 30 
+(so your network will have input level of 900 and output of 900 ).
+
+Train the network as best as you can; similarly to what you did in Homework I. Indicate how you decided on stopping condition.
+ (IT IS OK to adapt your old code  from project I if you wish.)
+  
+
+Based on the size of the hidden level; you have a compression of the picture.
+
+You should experiment with (1) the size of the hidden level (i.e. what percentage of neurons give what sort of results).  How much can you compress Lenna this way? 
+(2)  Run the Lenna-trained filter on (i) text files   (ii) landscape picture   (iii) another person's picture (it can be your own) but stored in the same format as Lenna and report on how close they are to the identity.
+
+Try to make a filter that will distinguish between photographs and other files.
+
+
+Part B)
+
+You should implement the Kohonen algorithm for the following tasks:  (Make sure you run the algorithm long enough.)
+
+1) Take a two dimensional Kohonen net of dimension 12 x 12  and place it on a square of dimension 1 x 1.   That is any point (x, y) with   0<x<1  and 0<y<1 belongs to the square in the following ways
+   (i) assume that the data is chosen uniformly from the square
+   (ii) assume that the probability that <x,y> is a data point is proportional to the size of x
+    (iii)  assume that the probability that <x,y> is a data point is proportional to the distance of <x,y> from <0,0>
+
+Show your results by snapshots of the Kohonen development at four different times.
+
+2)   Do the same what the Kohonen net is a chain of length 30 (i.e. 30 nodes in linear order)
+
+3)   Do the same (i.e. both rectangular net of 12 x 12 and a chain of length 30) for a donut (i.e. data chosen between two circles; one of radius 1 and one of radius 2).   Do this for both a 12 x 12
+net and a chain of length 30.   Do this both for uniform data in the donut; and for data which is inversely proportional to the distance from the center (i.e. nearer the inner circle is more likely to be chosen.)
+
+
