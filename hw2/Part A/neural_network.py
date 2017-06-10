@@ -14,7 +14,7 @@ class Neuron:
     def __init__(self, number_of_neurons_in_previous_layer):
         self.value = 0
         self.error = 0
-        self.weights = [random() for _ in range(number_of_neurons_in_previous_layer)]
+        self.weights = [(2/3.0) * random() - 1.0 / 3 for _ in range(number_of_neurons_in_previous_layer)]
 
     def get_value(self):
         return self.value
