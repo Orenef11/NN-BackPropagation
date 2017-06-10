@@ -1,17 +1,17 @@
 from pickle import dump, HIGHEST_PROTOCOL
 
 
-def _gather_network_hidden_level_neurons_weights(network):
-    weights_collection = {"hidden_level_weights": []}
-    for neuron in network.hidden_level:
-        weights_collection["hidden_level_weights"].append(neuron.weights)
+def _gather_network_hidden_layer_neurons_weights(network):
+    weights_collection = {"hidden_layer_weights": []}
+    for neuron in network.hidden_layer:
+        weights_collection["hidden_layer_weights"].append(neuron.weights)
     return weights_collection
 
 
-def _gather_network_output_level_neurons_weights(network):
-    weights_collection = {"output_level_weights": []}
-    for neuron in network.output_level:
-        weights_collection["output_level_weights"].append(neuron.weights)
+def _gather_network_output_layer_neurons_weights(network):
+    weights_collection = {"output_layer_weights": []}
+    for neuron in network.output_layer:
+        weights_collection["output_layer_weights"].append(neuron.weights)
     return weights_collection
 
 
@@ -20,14 +20,14 @@ def training_neurons_network(network,
                              input_neurons,
                              network_learning_rate,
                              neurons_activation_func_name,
-                             number_of_hidden_level_neurons):
+                             number_of_hidden_layer_neurons):
     epoch = 1
     stop_network_learning = False
     last_error_rate = 0
     while stop_network_learning is False:
         error_rate = 0
         for input in training_samples:
-            expected_output_values = input
+            expected_output_values = input[:]
             for input_neuron_index, input_field in zip(range(len(input_neurons)), input):
                 input_neurons[input_neuron_index].value = input_field
             output_values = network.calculate_net_output(input_neurons)
@@ -40,12 +40,12 @@ def training_neurons_network(network,
             stop_network_learning = last_error_rate < error_rate
         last_error_rate = error_rate
         epoch += 1
-        trained_network_weights_file_name = "hidden_size_" + str(number_of_hidden_level_neurons)
+        trained_network_weights_file_name = "hidden_size_" + str(number_of_hidden_layer_neurons)
         trained_network_weights_file_name += "learning_rate_" + str(network_learning_rate)
         trained_network_weights_file_name += "activation_func_" + neurons_activation_func_name + ".pickle"
         with open(trained_network_weights_file_name, 'wb') as results_file:
-            dump(_gather_network_hidden_level_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
-            dump(_gather_network_output_level_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
+            dump(_gather_network_hidden_layer_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
+            dump(_gather_network_output_layer_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
     
 
 def normailze_sample_data(data_row):
