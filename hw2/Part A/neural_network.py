@@ -1,4 +1,13 @@
 from random import random
+from math import exp
+
+
+def neuron_activation(neuron_value):
+    return 1.0 / (1.0 + exp(-neuron_value))
+
+
+def neuron_activation_derivative(activation_output):
+    return activation_output * (1.0 - activation_output)
 
 
 class Neuron:
