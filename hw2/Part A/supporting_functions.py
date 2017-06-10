@@ -1,12 +1,17 @@
 from pickle import dump, HIGHEST_PROTOCOL
 
 
-def _gather_network_weights(network):
-    weights_collection = []
+def _gather_network_hidden_level_neurons_weights(network):
+    weights_collection = {"hidden_level_weights": []}
     for neuron in network.hidden_level:
-        weights_collection.append(neuron.weights)
-    for neuron in network.output_layer:
-        weights_collection.append(neuron.weights)
+        weights_collection["hidden_level_weights"].append(neuron.weights)
+    return weights_collection
+
+
+def _gather_network_output_level_neurons_weights(network):
+    weights_collection = {"output_level_weights": []}
+    for neuron in network.output_level:
+        weights_collection["output_level_weights"].append(neuron.weights)
     return weights_collection
 
 
@@ -14,7 +19,8 @@ def training_neurons_network(network,
                              training_samples,
                              input_neurons,
                              network_learning_rate,
-                             running_index=1):
+                             neurons_activation_func_name,
+                             number_of_hidden_level_neurons):
     epoch = 1
     stop_network_learning = False
     last_error_rate = 0
@@ -34,9 +40,12 @@ def training_neurons_network(network,
             stop_network_learning = last_error_rate < error_rate
         last_error_rate = error_rate
         epoch += 1
-        trained_network_weights_file_name = "training_run_" + str(running_index) + ".pickle"
+        trained_network_weights_file_name = "hidden_size_" + str(number_of_hidden_level_neurons)
+        trained_network_weights_file_name += "learning_rate_" + str(network_learning_rate)
+        trained_network_weights_file_name += "activation_func_" + neurons_activation_func_name + ".py"
         with open(trained_network_weights_file_name, 'wb') as results_file:
-            dump(_gather_network_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
+            dump(_gather_network_hidden_level_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
+            dump(_gather_network_output_level_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
     
 
 def normailze_sample_data(data_row):
