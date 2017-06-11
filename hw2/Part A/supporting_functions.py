@@ -1,17 +1,18 @@
 from pickle import dump, HIGHEST_PROTOCOL
 
 
-def _gather_network_hidden_layer_neurons_weights(network):
-    weights_collection = {"hidden_layer_weights": []}
-    for neuron in network.hidden_layer:
-        weights_collection["hidden_layer_weights"].append(neuron.weights)
+def _gather_network_layer_weights(layer_neurons):
+    weights_collection = []
+    for neuron in layer_neurons:
+        weights_collection.append(neuron.weights)
     return weights_collection
 
 
-def _gather_network_output_layer_neurons_weights(network):
-    weights_collection = {"output_layer_weights": []}
-    for neuron in network.output_layer:
-        weights_collection["output_layer_weights"].append(neuron.weights)
+def _gather_network_weights(network, input_neurons):
+    weights_collection = {}
+    weights_collection.update({"input_neurons_weights": _gather_network_layer_weights(input_neurons)})
+    weights_collection.update({"hidden_layer_weights": _gather_network_layer_weights(network.hidden_layer)})
+    weights_collection.update({"output_layer_weights": _gather_network_layer_weights(network.output_layer)})
     return weights_collection
 
 
@@ -44,9 +45,8 @@ def training_neurons_network(network,
         trained_network_weights_file_name += "_learning_rate_" + str(network_learning_rate)
         trained_network_weights_file_name += "_activation_func_" + neurons_activation_func_name + ".pickle"
         with open(trained_network_weights_file_name, 'wb') as results_file:
-            dump(_gather_network_hidden_layer_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
-            dump(_gather_network_output_layer_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
-    
+            dump(_gather_network_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
+
 
 def normailze_sample_data(data_row):
         normalized_data_row = []
