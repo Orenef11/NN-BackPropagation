@@ -41,8 +41,8 @@ def training_neurons_network(network,
         last_error_rate = error_rate
         epoch += 1
         trained_network_weights_file_name = "hidden_size_" + str(number_of_hidden_layer_neurons)
-        trained_network_weights_file_name += "learning_rate_" + str(network_learning_rate)
-        trained_network_weights_file_name += "activation_func_" + neurons_activation_func_name + ".pickle"
+        trained_network_weights_file_name += "_learning_rate_" + str(network_learning_rate)
+        trained_network_weights_file_name += "_activation_func_" + neurons_activation_func_name + ".pickle"
         with open(trained_network_weights_file_name, 'wb') as results_file:
             dump(_gather_network_hidden_layer_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
             dump(_gather_network_output_layer_neurons_weights(network), results_file, protocol=HIGHEST_PROTOCOL)
