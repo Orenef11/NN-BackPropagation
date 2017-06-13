@@ -8,14 +8,6 @@ BOTTOM_RANGE = -0.3
 UPPER_RANGE = 0.3
 
 
-def neuron_activation(neuron_value):
-    return 1.0 / (1.0 + exp(-neuron_value))
-
-
-def neuron_activation_derivative(activation_output):
-    return activation_output * (1.0 - activation_output)
-
-
 class Neuron(object):
     def __init__(self, number_of_neurons_in_previous_layer):
         self.value = 0
@@ -28,17 +20,17 @@ class Neuron(object):
     def get_error(self):
         return self.error
 
-    def calculate_neuron_value(self, previous_layer):
+    def calculate_neuron_value(self, previous_layer, neuron_activiation_func):
         input_weights_sum = 0
         for index, weight in enumerate(self.weights):
             input_weights_sum += previous_layer[index].get_value() * weight
-        self.value = neuron_activation(input_weights_sum)
+        self.value = neuron_activiation_func(input_weights_sum)
 
-    def calculate_error_by_neurons_layer(self, neuron_index, next_layer):
+    def calculate_error_by_neurons_layer(self, neuron_index, next_layer, neuron_activiation_func_derivative):
         error_weight_sum = 0
         for neuron in next_layer:
             error_weight_sum += neuron.get_error() * neuron.weights[neuron_index]
-        self.error = error_weight_sum * neuron_activation_derivative(self.get_value())
+        self.error = error_weight_sum * neuron_activiation_func_derivative(self.get_value())
 
     def update_neuron_weights(self, previous_layer, network_learning_rate):
         for index, weight in enumerate(self.weights):
@@ -46,7 +38,13 @@ class Neuron(object):
 
 
 class Network(object):
-    def __init__(self, number_of_neurons_in_hidden_layer, output_size, learning_rate, training_samples):
+    def __init__(self,
+                 number_of_neurons_in_hidden_layer,
+                 output_size,
+                 learning_rate,
+                 training_samples,
+                 neurons_activation_function,
+                 neurons_ativiation_function_derivative):
         self.input_layer = [Neuron(input_size) for _ in range(training_samples)]
         self._initialize_input_layer_neurons_value(training_samples)
         input_layer_bias_neuron = Neuron(0)
@@ -58,6 +56,8 @@ class Network(object):
         hidden_layer_bias_neuron.value = 1
         self.hidden_layer.append(hidden_layer_bias_neuron)
         self.output_layer = [Neuron(len(self.hidden_layer)) for _ in range(output_size)]
+        self._neurons_activation_function = neurons_activation_function
+        self._neurons_ativiation_function_derivative = neurons_ativiation_function_derivative
         self.__epochs = 1
         self.__learning_rate = learning_rate
         self.__training_samples = training_samples
@@ -65,9 +65,9 @@ class Network(object):
 
     def __calculate_net_output(self):
         for neuron in self.hidden_layer[:-1]:
-            neuron.calculate_neuron_value(self.input_layer)
+            neuron.calculate_neuron_value(self.input_layer, self._neurons_activation_function)
         for neuron in self.output_layer:
-            neuron.calculate_neuron_value(self.hidden_layer)
+            neuron.calculate_neuron_value(self.hidden_layer, self._neurons_activation_function)
         return [output_neuron.get_value() for output_neuron in self.output_layer]
 
     def __calculate_neurons_error(self, expected_values):
@@ -75,7 +75,7 @@ class Network(object):
         for neuron, expected_value in zip(self.output_layer, expected_values):
             neuron.error = (expected_value - neuron.get_value()) * neuron_activation_derivative(neuron.get_value())
         for neuron_index, neuron in enumerate(self.hidden_layer):
-            neuron.calculate_error_by_neurons_layer(neuron_index, next_layer)
+            neuron.calculate_error_by_neurons_layer(neuron_index, next_layer, self_.neurons_ativiation_function_derivative)
 
     def __update_neurons_weights(self, network_learning_rate):
         for neuron in self.hidden_layer:
