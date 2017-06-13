@@ -45,7 +45,7 @@ class Network(object):
                  training_samples,
                  neurons_activation_function,
                  neurons_ativiation_function_derivative):
-        self.input_layer = [Neuron(0) for _ in range(training_samples)]
+        self.input_layer = [Neuron(0) for _ in range(len(training_samples))]
         input_layer_bias_neuron = Neuron(0)
         input_layer_bias_neuron.value = 1
         self.input_layer.append(input_layer_bias_neuron)
