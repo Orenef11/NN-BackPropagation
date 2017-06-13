@@ -5,7 +5,7 @@ def sigmoid_activation_function(neuron_value):
     return 1.0 / (1.0 + exp(-neuron_value))
 
 
-def bipolar_sigmoid_activation_function_derivative(activation_output)
+def sigmoid_activation_function_derivative(activation_output)
     return activation_output * (1.0 - activation_output)
 
 
