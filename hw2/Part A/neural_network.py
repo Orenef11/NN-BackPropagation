@@ -82,7 +82,7 @@ class Network(object):
         for neuron in self.output_layer:
             neuron.update_neuron_weights(self.hidden_layer, network_learning_rate)
 
-    def training_neurons_network(self, training_samples):
+    def training_neurons_network(self):
         self.__epochs = 1
         stop_network_learning = False
         last_error_rate = 0
@@ -90,7 +90,7 @@ class Network(object):
             error_rate = 0
             for train_input in self.__training_samples:
                 expected_output_values = train_input[:]
-                for input_neuron_index, input_field in zip(range(len(self.input_layer)), training_samples):
+                for input_neuron_index, input_field in zip(range(len(self.input_layer)), self.__training_samples):
                     self.input_layer[input_neuron_index].value = input_field
                 output_values = self.__calculate_net_output()
                 for output_value, expected_output_value in zip(output_values, expected_output_values):
