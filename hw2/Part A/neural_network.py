@@ -45,11 +45,11 @@ class Network(object):
                  training_samples,
                  neurons_activation_function,
                  neurons_ativiation_function_derivative):
-        self.input_layer = [Neuron(0) for _ in range(len(training_samples))]
+        input_size = len(training_samples)
+        self.input_layer = [Neuron(0) for _ in range(input_size)]
         input_layer_bias_neuron = Neuron(0)
         input_layer_bias_neuron.value = 1
         self.input_layer.append(input_layer_bias_neuron)
-        input_size = len(training_samples)
         self.hidden_layer = [Neuron(input_size) for _ in range(number_of_neurons_in_hidden_layer)]
         hidden_layer_bias_neuron = Neuron(input_size)
         hidden_layer_bias_neuron.value = 1
