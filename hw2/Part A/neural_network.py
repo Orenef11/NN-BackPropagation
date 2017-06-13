@@ -46,21 +46,26 @@ class Neuron(object):
 
 
 class Network(object):
-    def __init__(self, input_size, number_of_neurons_in_hidden_layer, output_size, learning_rate, training_samples):
-        self.output_layer = []
+    def __init__(self, number_of_neurons_in_hidden_layer, output_size, learning_rate, training_samples):
+        self.input_layer = [Neuron(input_size) for _ in range(training_samples)]
+        self._initialize_input_layer_neurons_value(training_samples)
+        input_layer_bias_neuron = Neuron(0)
+        input_layer_bias_neuron.value = 1
+        self.input_layer.append(input_layer_bias_neuron)
+        input_size = len(training_samples)
         self.hidden_layer = [Neuron(input_size) for _ in range(number_of_neurons_in_hidden_layer)]
-        bias_neuron = Neuron(input_size)
-        bias_neuron.value = 1
-        self.hidden_layer.append(bias_neuron)
+        hidden_layer_bias_neuron = Neuron(input_size)
+        hidden_layer_bias_neuron.value = 1
+        self.hidden_layer.append(hidden_layer_bias_neuron)
         self.output_layer = [Neuron(len(self.hidden_layer)) for _ in range(output_size)]
         self.__epochs = 1
         self.__learning_rate = learning_rate
         self.__training_samples = training_samples
         self.__error_rate = None
 
-    def __calculate_net_output(self, input_neurons):
+    def __calculate_net_output(self):
         for neuron in self.hidden_layer[:-1]:
-            neuron.calculate_neuron_value(input_neurons)
+            neuron.calculate_neuron_value(self.input_layer)
         for neuron in self.output_layer:
             neuron.calculate_neuron_value(self.hidden_layer)
         return [output_neuron.get_value() for output_neuron in self.output_layer]
@@ -72,13 +77,13 @@ class Network(object):
         for neuron_index, neuron in enumerate(self.hidden_layer):
             neuron.calculate_error_by_neurons_layer(neuron_index, next_layer)
 
-    def __update_neurons_weights(self, input_neurons, network_learning_rate):
+    def __update_neurons_weights(self, network_learning_rate):
         for neuron in self.hidden_layer:
-            neuron.update_neuron_weights(input_neurons, network_learning_rate)
+            neuron.update_neuron_weights(self.input_layer, network_learning_rate)
         for neuron in self.output_layer:
             neuron.update_neuron_weights(self.hidden_layer, network_learning_rate)
 
-    def training_neurons_network(self, input_neurons):
+    def training_neurons_network(self):
         self.__epochs = 1
         stop_network_learning = False
         last_error_rate = 0
@@ -86,13 +91,13 @@ class Network(object):
             error_rate = 0
             for train_input in self.__training_samples:
                 expected_output_values = train_input[:]
-                for input_neuron_index, input_field in zip(range(len(input_neurons)), train_input):
-                    input_neurons[input_neuron_index].value = input_field
-                output_values = self.__calculate_net_output(input_neurons)
+                for input_neuron_index, input_field in zip(range(len(self.input_layer)), training_samples):
+                    self.input_layer[input_neuron_index].value = input_field
+                output_values = self.__calculate_net_output()
                 for output_value, expected_output_value in zip(output_values, expected_output_values):
                     error_rate += (expected_output_value - output_value) ** 2
                 self.__calculate_neurons_error(expected_output_values)
-                self.__update_neurons_weights(input_neurons, self.__learning_rate)
+                self.__update_neurons_weights(self.__learning_rate)
             is_first_learning_iteration = self.__epochs == 1
             if is_first_learning_iteration is False:
                 stop_network_learning = last_error_rate < error_rate
