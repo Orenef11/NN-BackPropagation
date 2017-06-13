@@ -90,7 +90,7 @@ class Network(object):
             error_rate = 0
             for train_input in self.__training_samples:
                 expected_output_values = train_input[:]
-                for input_neuron_index, input_field in zip(range(len(self.input_layer)), self.__training_samples):
+                for input_neuron_index, input_field in zip(range(len(self.input_layer)), train_input):
                     self.input_layer[input_neuron_index].value = input_field
                 output_values = self.__calculate_net_output()
                 for output_value, expected_output_value in zip(output_values, expected_output_values):
