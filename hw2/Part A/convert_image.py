@@ -51,14 +51,6 @@ class ImageConvert(object):
         makedirs(self.__image_ascii_des_path)
         print("Create '{}' folder".format(self.__image_ascii_des_path))
 
-        # Creates the folder that contains all ascii sub-images of the original image
-        gray_folder_path = path.split(self.__gray_image_path)[0]
-        if not path.isdir(gray_folder_path):
-            makedirs(gray_folder_path)
-            print("Create '{}' folder".format(gray_folder_path))
-        if path.isfile(self.__gray_image_path):
-            remove(self.__gray_image_path)
-
         # Creates a gray image and reduces its size according to the new size
         self.__reduce_and_change_color_from_source_folder()
         self.__image_obj = imread(self.__gray_image_path)
@@ -68,6 +60,11 @@ class ImageConvert(object):
         self.__create_sub_image(self.__image_regular_des_path)
         self.__create_sub_image(self.__image_ascii_des_path, True)
         del self.__image_obj
+
+        image_data_list = self.read_sub_images_file(self.__image_regular_des_path)
+        original_image = self.create_original_image_from_sub_images_file(image_data_list)
+        self.show_restored_image_sub_images(original_image)
+        print()
 
     def __reduce_and_change_color_from_source_folder(self):
         if path.isfile(self.__gray_image_path):
@@ -158,25 +155,12 @@ class ImageConvert(object):
         img = toimage(data)
         img.show()
 
-    @property
-    def image_regular_des_path(self):
-        return self.__image_regular_des_path
-
-    @property
-    def image_ascii_des_path(self):
-        return self.__image_ascii_des_path
-
 
 def main():
-    for folder_name in listdir(IMAGES_FOLDER):
-        image_des_foldr_path = path.join(SUB_IMAGES_FOLDER, folder_name)
-        for image_name in listdir(path.join(IMAGES_FOLDER, folder_name)):
-            image_source_path = path.join(path.join(IMAGES_FOLDER, folder_name), image_name)
-            image_convert_obj = ImageConvert(image_source_path, image_des_foldr_path, IMAGE_SHAPE, SUB_IMAGE_SHAPE,
-                                             IMAGE_MODE)
-            image_data_list = image_convert_obj.read_sub_images_file(image_convert_obj.image_regular_des_path)
-            original_image = image_convert_obj.create_original_image_from_sub_images_file(image_data_list)
-            image_convert_obj.show_restored_image_sub_images(original_image)
+    # Contains in each row the sub-picture derived from the big picture.
+    image_source_path = path.join(path.join(IMAGES_FOLDER, 'Lena'), 'lena.png')
+    image_des_foldr_path = path.join(path.join(SUB_IMAGES_FOLDER, 'Lena'))
+    image_convert_obj = ImageConvert(image_source_path, image_des_foldr_path, IMAGE_SHAPE, SUB_IMAGE_SHAPE, IMAGE_MODE)
 
 
 if __name__ == "__main__":
