@@ -113,7 +113,7 @@ class ImageConvert(object):
         return abnormal_sub_image_data_list
 
     def __normalize_sub_image_list(self, sub_images_data_list):
-        max_mix_diff = self.__max_pixel_value - self.__min_pixel_value
+        max_mix_diff = float(self.__max_pixel_value - self.__min_pixel_value)
         sub_images_data_list = [list(map(int, line)) for line in sub_images_data_list]
         norm_sub_image_data_list = []
         for line in sub_images_data_list:
