@@ -48,11 +48,11 @@ class Network(object):
         self.__filename = str(filename)
         self.image_convert_obj = image_convert_obj
         training_samples = image_convert_obj.read_sub_images_file(image_convert_obj.image_regular_des_path)
-        self.input_layer = [Neuron(0) for _ in range(len(training_samples))]
+        input_size = len(training_samples[0])
+        self.input_layer = [Neuron(0) for _ in range(input_size)]
         input_layer_bias_neuron = Neuron(0)
         input_layer_bias_neuron.value = 1
         self.input_layer.append(input_layer_bias_neuron)
-        input_size = len(training_samples)
         self.hidden_layer = [Neuron(input_size) for _ in range(number_of_neurons_in_hidden_layer)]
         hidden_layer_bias_neuron = Neuron(input_size)
         hidden_layer_bias_neuron.value = 1
@@ -97,7 +97,7 @@ class Network(object):
             error_rate = 0
             for train_input in self.__training_samples:
                 expected_output_values = train_input[:]
-                for input_neuron_index, sub_training_list in zip(range(len(self.input_layer)), self.__training_samples):
+                for input_neuron_index, sub_training_list in zip(range(len(self.input_layer)), train_input):
                     for pixel_value in sub_training_list:
                         self.input_layer[input_neuron_index].value = pixel_value
                 output_values = self.__calculate_net_output()
