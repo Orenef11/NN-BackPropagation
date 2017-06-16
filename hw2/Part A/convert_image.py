@@ -162,6 +162,7 @@ class ImageConvert(object):
         return self.__image_ascii_des_path
 
 
+
 # def main():
 #     IMAGES_FOLDER = 'Images'
 #     SUB_IMAGES_FOLDER = 'Sub-images'
