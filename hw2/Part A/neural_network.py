@@ -1,10 +1,15 @@
 from random import uniform
 from os import path, makedirs
 from pickle import dump, HIGHEST_PROTOCOL
+from image_convert import ImageConvert
+from activation_functions import *
+from time import clock
 
 BOTTOM_RANGE = -0.4
 UPPER_RANGE = 0.4
 MODELS_FOLDER = 'Models structure'
+DEBUGGING_FOLDER = 'Debugging'
+EPOCHS = 100
 
 
 class Neuron(object):
@@ -43,11 +48,11 @@ class Network(object):
     #              neurons_activation_function, neurons_ativiation_function_derivative
     def __init__(self, parameters):
         number_of_neurons_in_hidden_layer, output_size, learning_rate, image_convert_obj, neurons_activation_function, \
-            neurons_ativiation_function_derivative, filename = \
+        neurons_ativiation_function_derivative, filename = \
             parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6]
         self.__filename = str(filename)
         self.image_convert_obj = image_convert_obj
-        training_samples = image_convert_obj.read_sub_images_file(image_convert_obj.image_regular_des_path)
+        training_samples = image_convert_obj.get_sub_images_data_list()
         input_size = len(training_samples[0])
         self.input_layer = [Neuron(0) for _ in range(input_size)]
         input_layer_bias_neuron = Neuron(0)
@@ -64,6 +69,7 @@ class Network(object):
         self.__learning_rate = learning_rate
         self.__training_samples = training_samples
         self.__error_rate = None
+        self.__build_time = clock()
 
         self.training_neurons_network()
 
@@ -90,33 +96,53 @@ class Network(object):
             neuron.update_neuron_weights(self.hidden_layer, network_learning_rate)
 
     def training_neurons_network(self):
-        self.__epochs = 1
-        stop_network_learning = False
-        last_error_rate = 0
-        while stop_network_learning is False:
-            error_rate = 0
-            for train_input in self.__training_samples:
-                expected_output_values = train_input[:]
-                for input_neuron_index, pixel_value in zip(range(len(self.input_layer)), train_input):
-                    self.input_layer[input_neuron_index].value = pixel_value
-                output_values = self.__calculate_net_output()
-                for output_value, expected_output_value in zip(output_values, expected_output_values):
-                    error_rate += (expected_output_value - output_value) ** 2
-                self.__calculate_neurons_error(expected_output_values)
-                self.__update_neurons_weights(self.__learning_rate)
-            is_first_learning_iteration = self.__epochs == 1
-            if is_first_learning_iteration is False:
-                stop_network_learning = last_error_rate < error_rate
-            last_error_rate = error_rate
-            self.__epochs += 1
-        self.__error_rate = last_error_rate
-        self.dump_nn_to_pickle()
-        print(self.__filename, self.__error_rate)
+        epoch = 0
+        error_rate_list = [float(i) for i in range(EPOCHS)]
+        best_error_rate = float('inf')
+        if not path.isdir(DEBUGGING_FOLDER):
+            makedirs(DEBUGGING_FOLDER)
+        with open(path.join(DEBUGGING_FOLDER, self.__filename + '.txt'), 'w') as error_dump_file:
+            for epoch_idx, epoch in enumerate(range(EPOCHS)):
+                epoch_time_start = clock()
+                error_rate = 0
+                for train_input in self.__training_samples:
+                    expected_output_values = train_input[:]
+                    for input_neuron_index, pixel_value in zip(range(len(self.input_layer)), train_input):
+                        self.input_layer[input_neuron_index].value = pixel_value
+                    output_values = self.__calculate_net_output()
+                    for output_value, expected_output_value in zip(output_values, expected_output_values):
+                        error_rate += (expected_output_value - output_value) ** 2
+                    self.__calculate_neurons_error(expected_output_values)
+                    self.__update_neurons_weights(self.__learning_rate)
+
+                error_rate_list[epoch_idx] = error_rate
+                if best_error_rate > error_rate:
+                    self.__error_rate = error_rate
+                    best_error_rate = error_rate
+                    if error_rate_list[epoch_idx] - error_rate_list[epoch_idx - 1] > -1:
+                        print(best_error_rate, 'save')
+                        self.dump_nn_to_pickle()
+
+                # if epoch_idx > 2 and abs(error_rate_list[epoch_idx] - error_rate_list[epoch_idx - 1]) <= 0.1 and \
+                #         abs(error_rate_list[epoch_idx - 1] - error_rate_list[epoch_idx - 2]) <= 0.1:
+                #     print(error_rate_list[epoch_idx-2:epoch_idx+1])
+                #     print("Epochs {}, rate {}, time {}".format(epoch, error_rate, clock() - time_start))
+                #     print('break')
+                #     break
+                error_dump_file.write("Epochs {}, rate {}, time {}\n"
+                                      .format(epoch, error_rate, clock() - epoch_time_start))
+        self.__build_time = (clock() - self.__build_time) / 60.0
+        print("Total build {} network is {} mins".format(self.__filename, self.__build_time))
 
     def dump_nn_to_pickle(self):
         if not path.isdir(MODELS_FOLDER):
             makedirs(MODELS_FOLDER)
-        filename = "model_num_-{}-_hidden_size_-{}-_learning_rate_-{}"\
-                   .format(self.__filename, str(len(self.hidden_layer)), str(self.__learning_rate)) + '.pickle'
+        filename = "model_num_-{}-_hidden_size_-{}-_learning_rate_-{}" \
+                       .format(self.__filename, str(len(self.hidden_layer)), str(self.__learning_rate)) + '.pickle'
         with open(path.join(MODELS_FOLDER, filename), 'wb') as model_file:
             dump(self, model_file, HIGHEST_PROTOCOL)
+
+
+lena_obj = ImageConvert(path.join('Images', path.join('Lena', 'lena.png')), (256, 256), (30, 30), 'L')
+parameters = (1, 900, 0.2, lena_obj, sigmoid_activation_function, sigmoid_activation_function_derivative, '1')
+Network(parameters)
