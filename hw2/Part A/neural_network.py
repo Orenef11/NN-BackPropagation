@@ -114,6 +114,8 @@ class Network(object):
                 if best_error_rate > error_rate:
                     self.__error_rate = error_rate
                     dump_nn_flag = best_error_rate - error_rate > 1
+                    error_dump_file.write("Updated best error: {}. was found in iteration {}, time {}\n"
+                                          .format(error_rate, epoch, clock() - epoch_time_start))
                     best_error_rate = error_rate
                     if dump_nn_flag:
                         # print('model', self.__filename, 'save', best_error_rate)
