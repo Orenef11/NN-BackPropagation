@@ -1,6 +1,6 @@
 from random import uniform
 from os import path, makedirs
-from pickle import dump, HIGHEST_PROTOCOL
+from pickle import dump, HIGHEST_PROTOCOL, load
 from image_convert import ImageConvert
 from activation_functions import *
 from time import clock
@@ -65,7 +65,7 @@ class Network(object):
         self.output_layer = [Neuron(len(self.hidden_layer)) for _ in range(output_size)]
         self._neurons_activation_function = neurons_activation_function
         self._neurons_ativiation_function_derivative = neurons_ativiation_function_derivative
-        self.__epochs = 1
+        self.__best_epochs = -1
         self.__learning_rate = learning_rate
         self.__training_samples = training_samples
         self.__error_rate = None
@@ -96,11 +96,7 @@ class Network(object):
             neuron.update_neuron_weights(self.hidden_layer, network_learning_rate)
 
     def training_neurons_network(self):
-        epoch = 0
-        error_rate_list = [float(i) for i in range(EPOCHS)]
         best_error_rate = float('inf')
-        if not path.isdir(DEBUGGING_FOLDER):
-            makedirs(DEBUGGING_FOLDER)
         with open(path.join(DEBUGGING_FOLDER, self.__filename + '.txt'), 'w') as error_dump_file:
             for epoch_idx, epoch in enumerate(range(EPOCHS)):
                 epoch_time_start = clock()
@@ -115,20 +111,15 @@ class Network(object):
                     self.__calculate_neurons_error(expected_output_values)
                     self.__update_neurons_weights(self.__learning_rate)
 
-                error_rate_list[epoch_idx] = error_rate
                 if best_error_rate > error_rate:
                     self.__error_rate = error_rate
+                    dump_nn_flag = best_error_rate - error_rate > 1
                     best_error_rate = error_rate
-                    if error_rate_list[epoch_idx] - error_rate_list[epoch_idx - 1] > -1:
-                        print(best_error_rate, 'save')
+                    if dump_nn_flag:
+                        # print('model', self.__filename, 'save', best_error_rate)
+                        self.__best_epochs = epoch_idx
                         self.dump_nn_to_pickle()
 
-                # if epoch_idx > 2 and abs(error_rate_list[epoch_idx] - error_rate_list[epoch_idx - 1]) <= 0.1 and \
-                #         abs(error_rate_list[epoch_idx - 1] - error_rate_list[epoch_idx - 2]) <= 0.1:
-                #     print(error_rate_list[epoch_idx-2:epoch_idx+1])
-                #     print("Epochs {}, rate {}, time {}".format(epoch, error_rate, clock() - time_start))
-                #     print('break')
-                #     break
                 error_dump_file.write("Epochs {}, rate {}, time {}\n"
                                       .format(epoch, error_rate, clock() - epoch_time_start))
         self.__build_time = (clock() - self.__build_time) / 60.0
@@ -142,7 +133,11 @@ class Network(object):
         with open(path.join(MODELS_FOLDER, filename), 'wb') as model_file:
             dump(self, model_file, HIGHEST_PROTOCOL)
 
-
-lena_obj = ImageConvert(path.join('Images', path.join('Lena', 'lena.png')), (256, 256), (30, 30), 'L')
-parameters = (1, 900, 0.2, lena_obj, sigmoid_activation_function, sigmoid_activation_function_derivative, '1')
-Network(parameters)
+# lena_obj = ImageConvert(path.join('Images', path.join('Lena', 'lena.png')), (256, 256), (30, 30), 'L')
+# parameters = (1, 900, 0.1, lena_obj, bipolar_sigmoid_activation_function, bipolar_sigmoid_activation_function_derivative, '1')
+# Network(parameters)
+# with open('Models structure\\model_num_-1-_hidden_size_-2-_learning_rate_-0.2.pickle', 'rb') as model_file:
+#     nn = load(model_file)
+#
+# print(nn)
+# print()
