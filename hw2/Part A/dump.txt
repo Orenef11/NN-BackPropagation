@@ -1,8 +1,0 @@
-Start time is 0.0
-Create sub-images split from original image
-Finish create sub-images, it took 0.8270046525203006 seconds
-Create networks structure list
-Finish create networks structure list, it took 5.9362300487086905e-05 seconds
-Training all networks structure 
-Finish training, it took 57.98695848390334 minutes
-The running time took 58.000743621026125 minutes
