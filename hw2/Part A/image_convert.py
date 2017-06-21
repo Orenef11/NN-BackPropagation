@@ -100,6 +100,17 @@ class ImageConvert(object):
 
         return restored_original_image_list
 
+    def get_rotated_image_sub_images_data(self, rotation_angle, image_name):
+        restored_original_image_list = self.create_original_image_from_sub_images_data_list(self.get_sub_images_data_list())
+        data = array(restored_original_image_list, dtype=uint8)
+        img = toimage(data)
+        rotated_img = img.rotate(rotation_angle)
+        rotated_image_name = image_name + "_" + str(rotation_angle) + "_deg_rotation"
+        rotated_image_path = path.join('Images', rotated_image_name + ".png")
+        rotated_img.save(rotated_image_path)
+        other_converter = ImageConvert(rotated_image_path, self.__image_shape, self.__sub_image_shape, self.__image_mode)
+        return other_converter.get_sub_images_data_list()
+
     @staticmethod
     def show_image_on_screen(restored_original_image_list):
         data = array(restored_original_image_list, dtype=uint8)
