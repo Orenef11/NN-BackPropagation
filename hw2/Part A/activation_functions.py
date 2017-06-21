@@ -1,18 +1,6 @@
 from math import exp
 
 
-class Activation_Function_Interface(object):
-    def __init__(function_type_name,
-                 activation_function,
-                 activation_function_derivative):
-        self.type_name = function_type_name
-        self.activation_function = activation_function
-        self.activation_function_derivative = activation_function_derivative
-
-    def display_function_type_name():
-        print "The function type is " + self.type_name
-
-
 def sigmoid_activation_function(self, neuron_value):
     try:
         return 1.0 / (1.0 + exp(-neuron_value))
