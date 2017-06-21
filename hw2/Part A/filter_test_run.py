@@ -21,7 +21,7 @@ larry_sub_pictures = larry_picture.get_sub_images_data_list()
 
 person_testing_results = []
 for larry_sub_picture in larry_sub_pictures:
-    network.update_input_layer_output_values(larry_sub_picture)
+    network.update_input_layer_neurons_value(larry_sub_picture)
     person_testing_results.append(network._Network__calculate_net_output())
 
 approximation_epsilon = 0.2
