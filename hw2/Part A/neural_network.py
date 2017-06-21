@@ -77,6 +77,10 @@ class Network(object):
         for input_neuron_index, pixel_value in zip(range(len(self.input_layer)), training_sample):
             self.input_layer[input_neuron_index].value = pixel_value    
 
+    def get_network_activation_function_type(self):
+        activation_function_name = self._neurons_activation_function.__name__
+        return activation_function_name.rsplit('_activation_function', 1)[0]
+
     def __calculate_net_output(self):
         for neuron in self.hidden_layer[:-1]:
             neuron.calculate_neuron_value(self.input_layer, self._neurons_activation_function)
