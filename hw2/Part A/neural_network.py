@@ -73,6 +73,10 @@ class Network(object):
 
         self.training_neurons_network()
 
+    def update_input_layer_neurons_value(self, training_sample):
+        for input_neuron_index, pixel_value in zip(range(len(self.input_layer)), training_sample):
+            self.input_layer[input_neuron_index].value = pixel_value    
+
     def __calculate_net_output(self):
         for neuron in self.hidden_layer[:-1]:
             neuron.calculate_neuron_value(self.input_layer, self._neurons_activation_function)
@@ -103,8 +107,7 @@ class Network(object):
                 error_rate = 0
                 for train_input in self.__training_samples:
                     expected_output_values = train_input[:]
-                    for input_neuron_index, pixel_value in zip(range(len(self.input_layer)), train_input):
-                        self.input_layer[input_neuron_index].value = pixel_value
+                    self.update_input_layer_neurons_value(train_input)
                     output_values = self.__calculate_net_output()
                     for output_value, expected_output_value in zip(output_values, expected_output_values):
                         error_rate += (expected_output_value - output_value) ** 2
