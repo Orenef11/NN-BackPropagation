@@ -24,11 +24,12 @@ for larry_sub_picture in larry_sub_pictures:
     network.update_input_layer_output_values(larry_sub_picture)
     person_testing_results.append(network._Network__calculate_net_output())
 
+approximation_epsilon = 0.2
 distance_result = 0
 filter_result = []
 for person_testing_result, larry_sub_picture in zip(person_testing_results, larry_sub_pictures):
     distance_result += calculate_distance(person_testing_result, larry_sub_picture)
-    filter_result.append(filter_relative_distances(person_testing_result, larry_sub_picture))
+    filter_result.append(filter_relative_distances(person_testing_result, larry_sub_picture, approximation_epsilon))
 print("CALCULATE DISTANCE RESULT = ", distance_result)
 print("FILTER RELATIVE DISTANCES RESULT = ", sum(filter_result) / 64.0)    
 
