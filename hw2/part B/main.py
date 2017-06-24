@@ -1,4 +1,4 @@
-from random import random, uniform
+from random import uniform
 from dataset.create_data import KohonenDataBase
 
 X_RANGE_BOUNDS = (0, 1)
@@ -21,10 +21,10 @@ def choose_point_uniformly():
 def choose_point_by_x():
     is_x_chosen_successfully = False
     while is_x_chosen_successfully is False:
-        x_value = random(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1])
-        x_pooling_probability_to_choose = random(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1])
+        x_value = uniform(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1])
+        x_pooling_probability_to_choose = uniform(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1])
         is_x_chosen_successfully = x_value >= x_pooling_probability_to_choose
-    y_value = random(Y_RANGE_BOUNDS[0], Y_RANGE_BOUNDS[1])
+    y_value = uniform(Y_RANGE_BOUNDS[0], Y_RANGE_BOUNDS[1])
     return tuple((x_value, y_value))
 
 
@@ -33,8 +33,8 @@ def choose_point_by_distance_to_center():
     while is_chosen_point_successfully is False:
         point = tuple((uniform(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1]), uniform(Y_RANGE_BOUNDS[0], Y_RANGE_BOUNDS[1])))
         distance_from_center = _calculate_distance(point, CENTER)
-        probability_to_choose = random(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1])
-        is_x_chosen_successfully = distance_from_center >= probability_to_choose
+        probability_to_choose = uniform(X_RANGE_BOUNDS[0], X_RANGE_BOUNDS[1])
+        is_chosen_point_successfully = distance_from_center >= probability_to_choose
     return point
 
 
