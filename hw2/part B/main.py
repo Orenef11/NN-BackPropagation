@@ -38,10 +38,18 @@ def choose_point_by_distance_to_center():
     return point
 
 
-def main():
-    database = KohonenDataBase(choose_point_uniformly, NUMBER_OF_POINTS)
-    database.generate_data_points()
+def draw_database_and_network(database, network):
     database.draw_data()
+    network.draw_network()
+    show()
+
+
+def main():
+    database = KohonenDataBase(choose_point_by_x, NUMBER_OF_POINTS)
+    database.generate_data_points()
+    network = KohonenNetwork([3, 3])
+    draw_database_and_network(database, network)
+    show()
 
 if __name__ == '__main__':
     main()
