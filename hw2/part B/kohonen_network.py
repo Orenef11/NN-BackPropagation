@@ -56,7 +56,7 @@ class KohonenNetwork(object):
                 neighbours_collection.append(search_result)
         return neighbours_collection
 
-    def _draw_neurons_connections(self):
+    def _draw_neurons_connection_lines(self):
         for (neuron_indexes, neuron) in self._network_neurons.items():
             neuron_neighbours = self._find_neuron_neighbours(neuron_indexes)
             for neuron_neighbour in neuron_neighbours:
@@ -68,4 +68,4 @@ class KohonenNetwork(object):
 
     def draw_network(self):
         self._draw_neurons()
-        self._draw_neurons_connections()
+        self._draw_neurons_connection_lines()
