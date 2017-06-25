@@ -49,7 +49,6 @@ def main():
     database.generate_data_points()
     network = KohonenNetwork([3, 3])
     draw_database_and_network(database, network)
-    show()
 
 if __name__ == '__main__':
     main()
