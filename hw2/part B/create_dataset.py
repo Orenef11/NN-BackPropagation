@@ -13,6 +13,9 @@ class KohonenDataBase(object):
             self._data_points.append(self._kernel_function())
         print "<DATABASE LOGGER> finished the database points generation"
 
+    def get_data_points(self):
+        return self._data_points
+
     def draw_data(self):
         axis([-3, 3, -3, 3])
         for point in self._data_points:
