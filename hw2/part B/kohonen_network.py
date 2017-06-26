@@ -1,8 +1,10 @@
 from itertools import product
 from random import random
 from matplotlib.pylab import plot
+from supporting_functions import calculate_distance
 
 NUMBER_OF_PLOT_DIMENSIONS = 2
+MAXIMUM_NUMBER_OF_ITERATIONS = 5000
 
 
 class Neuron(object):
@@ -24,13 +26,23 @@ class Neuron(object):
     def draw_neuron(self):
         plot(self._neuron_location_parameters[0], self._neuron_location_parameters[1], "ro", color="blue")
 
+    def calculate_distance_from_data_point(self, data_point):
+        neuron_location = self.get_neuron_location()
+        return calculate_distance(data_point, neuron_location)
+
+    def update_neuron_location(self, data_point, learning_rate):
+        for parameter_index in range(len(self._neuron_location_parameters)):
+            diffrence_from_data_point = data_point[parameter_index] - self._neuron_location_parameters[parameter_index]
+            self._neuron_location_parameters[parameter_index] += learning_rate * diffrence_from_data_point
+
     def get_neuron_location(self):
         return self._neuron_location_parameters
 
 
 class KohonenNetwork(object):
-    def __init__(self, network_dimensions):
+    def __init__(self, network_dimensions, learning_rate):
         self._network_dimensions = network_dimensions
+        self._learning_rate = learning_rate
         self._number_of_neurons = self._calculate_number_of_network_neurons()
         self._network_neurons = {}
         self._initialize_network_neurons()
@@ -78,3 +90,25 @@ class KohonenNetwork(object):
     def draw_network(self):
         self._draw_neurons()
         self._draw_neurons_connections()
+
+    def _get_neuron_with_smallest_distance_from_data_point(self, data_point):
+        neurons = self._network_neurons.values()
+        minimum_distance_neuron = neurons[0]
+        minimal_distance = neurons[0].calculate_distance_from_data_point(data_point)
+        for neuron in neurons[1:]:
+            neuron_distance_from_data_point = neuron.calculate_distance_from_data_point(data_point)
+            if neuron_distance_from_data_point < minimal_distance:
+                minimal_distance = neuron_distance_from_data_point
+                minimum_distance_neuron = neuron
+        return minimum_distance_neuron
+
+    def train_network(self, database):
+        data_points = database.get_data_points()
+        for number_of_iteration in range(MAXIMUM_NUMBER_OF_ITERATIONS):
+            if number_of_iteration % 100 == 0:
+                print "Iteration number: ", number_of_iteration
+            for data_point in data_points:
+                minimum_distance_neuron = self._get_neuron_with_smallest_distance_from_data_point(data_point)
+                minimum_distance_neuron.update_neuron_location(data_point, self._learning_rate)
+                for neighbour_neuron in minimum_distance_neuron.get_neuron_neighbours():
+                    neighbour_neuron.update_neuron_location(data_point, self._learning_rate)
