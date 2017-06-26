@@ -1,14 +1,14 @@
 from math import exp
 
 
-def sigmoid_activation_function(self, neuron_value):
+def sigmoid_activation_function(neuron_value):
     try:
         return 1.0 / (1.0 + exp(-neuron_value))
     except:
         return -1
 
 
-def sigmoid_activation_function_derivative(self, activation_output):
+def sigmoid_activation_function_derivative(activation_output):
     return activation_output * (1.0 - activation_output)
 
 

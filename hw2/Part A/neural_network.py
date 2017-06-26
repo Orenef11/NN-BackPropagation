@@ -1,15 +1,18 @@
 from random import uniform
 from os import path, makedirs
-from pickle import dump, HIGHEST_PROTOCOL, load
-from image_convert import ImageConvert
-from activation_functions import *
+from pickle import dump, HIGHEST_PROTOCOL
 from time import clock
 
 BOTTOM_RANGE = -0.4
 UPPER_RANGE = 0.4
 MODELS_FOLDER = 'Models structure'
-DEBUGGING_FOLDER = 'Debugging'
+MODELS_DUMPS_FOLDER = 'NN - models dump files'
 EPOCHS = 100
+
+if not path.isdir(MODELS_FOLDER):
+    makedirs(MODELS_FOLDER)
+if not path.isdir(MODELS_DUMPS_FOLDER):
+    makedirs(MODELS_DUMPS_FOLDER)
 
 
 class Neuron(object):
@@ -25,7 +28,7 @@ class Neuron(object):
         return self.error
 
     def calculate_neuron_value(self, previous_layer, neuron_activiation_func):
-        input_weights_sum = 0
+        input_weights_sum = 0.0
         for index, weight in enumerate(self.weights):
             input_weights_sum += previous_layer[index].get_value() * weight
         self.value = neuron_activiation_func(input_weights_sum)
@@ -45,10 +48,10 @@ class Network(object):
     # Because we use multiple cores, we could not move all the variables.
     # Therefore, the passed variable contains all the following variables:
     # number_of_neurons_in_hidden_layer, output_size, learning_rate, image_convert_obj,
-    #              neurons_activation_function, neurons_ativiation_function_derivative
+    #              neurons_activation_function, neurons_activation_function_derivative
     def __init__(self, parameters):
         number_of_neurons_in_hidden_layer, output_size, learning_rate, image_convert_obj, neurons_activation_function, \
-        neurons_ativiation_function_derivative, filename = \
+            neurons_activation_function_derivative, filename = \
             parameters[0], parameters[1], parameters[2], parameters[3], parameters[4], parameters[5], parameters[6]
         self.__filename = str(filename)
         self.image_convert_obj = image_convert_obj
@@ -64,7 +67,7 @@ class Network(object):
         self.hidden_layer.append(hidden_layer_bias_neuron)
         self.output_layer = [Neuron(len(self.hidden_layer)) for _ in range(output_size)]
         self._neurons_activation_function = neurons_activation_function
-        self._neurons_ativiation_function_derivative = neurons_ativiation_function_derivative
+        self._neurons_ativiation_function_derivative = neurons_activation_function_derivative
         self.__best_epochs = -1
         self.__learning_rate = learning_rate
         self.__training_samples = training_samples
@@ -74,14 +77,14 @@ class Network(object):
         self.training_neurons_network()
 
     def update_input_layer_neurons_value(self, training_sample):
-        for input_neuron_index, pixel_value in zip(range(len(self.input_layer)), training_sample):
-            self.input_layer[input_neuron_index].value = pixel_value    
+        for input_neuron_index, pixel_value in enumerate(training_sample):
+            self.input_layer[input_neuron_index].value = pixel_value
 
     def get_network_activation_function_type(self):
         activation_function_name = self._neurons_activation_function.__name__
         return activation_function_name.rsplit('_activation_function', 1)[0]
 
-    def __calculate_net_output(self):
+    def calculate_net_output(self):
         for neuron in self.hidden_layer[:-1]:
             neuron.calculate_neuron_value(self.input_layer, self._neurons_activation_function)
         for neuron in self.output_layer:
@@ -105,14 +108,14 @@ class Network(object):
 
     def training_neurons_network(self):
         best_error_rate = float('inf')
-        with open(path.join(DEBUGGING_FOLDER, self.__filename + '.txt'), 'w') as error_dump_file:
+        with open(path.join(MODELS_DUMPS_FOLDER, self.__filename + '.txt'), 'w') as error_dump_file:
             for epoch_idx, epoch in enumerate(range(EPOCHS)):
                 epoch_time_start = clock()
                 error_rate = 0
                 for train_input in self.__training_samples:
                     expected_output_values = train_input[:]
                     self.update_input_layer_neurons_value(train_input)
-                    output_values = self.__calculate_net_output()
+                    output_values = self.calculate_net_output()
                     for output_value, expected_output_value in zip(output_values, expected_output_values):
                         error_rate += (expected_output_value - output_value) ** 2
                     self.__calculate_neurons_error(expected_output_values)
@@ -135,18 +138,13 @@ class Network(object):
         print("Total build {} network is {} mins".format(self.__filename, self.__build_time))
 
     def dump_nn_to_pickle(self):
-        if not path.isdir(MODELS_FOLDER):
-            makedirs(MODELS_FOLDER)
         filename = "model_num_-{}-_hidden_size_-{}-_learning_rate_-{}" \
                        .format(self.__filename, str(len(self.hidden_layer)), str(self.__learning_rate)) + '.pickle'
         with open(path.join(MODELS_FOLDER, filename), 'wb') as model_file:
             dump(self, model_file, HIGHEST_PROTOCOL)
 
-# lena_obj = ImageConvert(path.join('Images', path.join('Lena', 'lena.png')), (256, 256), (30, 30), 'L')
-# parameters = (1, 900, 0.1, lena_obj, bipolar_sigmoid_activation_function, bipolar_sigmoid_activation_function_derivative, '1')
-# Network(parameters)
-# with open('Models structure\\model_num_-1-_hidden_size_-2-_learning_rate_-0.2.pickle', 'rb') as model_file:
-#     nn = load(model_file)
-#
-# print(nn)
-# print()
+    @property
+    def error_rate(self):
+        return self.__error_rate
+
+

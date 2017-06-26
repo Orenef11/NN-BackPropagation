@@ -1,3 +1,8 @@
+from image_convert import ImageConvert
+from pickle import load
+from os import path
+
+
 def calculate_distance(sub_picture_values, network_outputs):
     values_sum = 0
     for sub_picture_value, network_output in zip(sub_picture_values, network_outputs):
@@ -13,16 +18,16 @@ def filter_relative_distances(sub_picture_values, network_outputs, epsilon):
             successes += 1
     return successes / float(network_output_size)
 
-with open("trained_networks\\model_num_-292-_hidden_size_-99-_learning_rate_-0.1.pickle", 'rb') as model_file:
+with open("Best K Models\\model_num_-292-_hidden_size_-99-_learning_rate_-0.1.pickle", 'rb') as model_file:
     network = load(model_file)
 
-larry_picture_converter = ImageConvert(path.join('Images', path.join('Person', 'larry.png')), (256, 256), (30, 30), 'L')
-larry_sub_pictures = larry_picture.get_sub_images_data_list()
+larry_picture_converter = ImageConvert(path.join('Images', path.join('Person', 'Larry_Manevitz.png')), (256, 256), (30, 30), 'L')
+larry_sub_pictures = larry_picture_converter.get_sub_images_data_list()
 
 person_testing_results = []
 for larry_sub_picture in larry_sub_pictures:
     network.update_input_layer_neurons_value(larry_sub_picture)
-    person_testing_results.append(network._Network__calculate_net_output())
+    person_testing_results.append(network.calculate_net_output())
 
 approximation_epsilon = 0.2
 distance_result = 0
@@ -34,9 +39,7 @@ print("CALCULATE DISTANCE RESULT = ", distance_result)
 print("FILTER RELATIVE DISTANCES RESULT = ", sum(filter_result) / 64.0)    
 
 print("displaying original larry picture")
-larry_restored_original_image_list = larry_picture_converter.create_original_image_from_sub_images_data_list(person_testing_results)
-larry_picture_converter.show_image_on_screen(larry_restored_original_image_list)
+larry_picture_converter.show_image_on_screen(person_testing_results)
 
 print("displaying larry picture after network test run")
-larry_actual_original = larry_picture_converter.create_original_image_from_sub_images_data_list(larry_sub_pictures)
-larry_picture_converter.show_image_on_screen(larry_actual_original)
+larry_picture_converter.show_image_on_screen(larry_sub_pictures)

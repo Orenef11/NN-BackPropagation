@@ -1,32 +1,31 @@
 from PIL import Image
-from os import path, makedirs, remove, listdir
-from shutil import rmtree
+from os import path, makedirs
 from scipy.misc import imread
-from pickle import dump, HIGHEST_PROTOCOL, load
 from scipy.misc import toimage
 from numpy import array, uint8
 
 GRAY_IMAGES_FOLDER = 'Gray images'
 MAX_PIXEL_VALUE = 255
 MIN_PIXEL_VALUE = 0
-IMAGE_SHAPE = (256, 256)
 
 
 class ImageConvert(object):
-    def __init__(self, image_source_path, image_size_after_reduce, sub_image_shape, image_mode):
+    def __init__(self, image_source_path, image_shape_after_reduce, sub_image_shape, image_mode):
         if not path.isfile(image_source_path):
             print("Image does not exist in '{}' path!".format(image_source_path))
             exit()
 
         self.__image_source_path = image_source_path
         self.__gray_image_path = path.join(GRAY_IMAGES_FOLDER, path.split(image_source_path)[-1])
-        self.__gray_shape = image_size_after_reduce
+        self.__gray_shape = image_shape_after_reduce
         self.__image_mode = image_mode
         self.__sub_image_shape = sub_image_shape
-        self.__image_shape = IMAGE_SHAPE
+        self.__image_shape = image_shape_after_reduce
         self.__sub_images_data_list = self.__create_sub_images_data()
 
     def __reduce_size_and_change_image_to_gray(self):
+        if not path.isdir(path.split(self.__gray_image_path)[0]):
+            makedirs(path.split(self.__gray_image_path)[0])
         if not path.isfile(self.__gray_image_path):
             Image.open(self.__image_source_path).convert(self.__image_mode).resize(self.__gray_shape) \
                 .save(self.__gray_image_path, optimize=True, quality=95)
@@ -75,7 +74,7 @@ class ImageConvert(object):
 
         return abnormal_sub_image_data_list
 
-    def create_original_image_from_sub_images_data_list(self, sub_images_data_list):
+    def __create_original_image_from_sub_images_data_list(self, sub_images_data_list):
         sub_images_data_list = self.__abnormal_sub_images_file(sub_images_data_list)
         sub_images_list = []
         for sub_image_list in sub_images_data_list:
@@ -101,7 +100,8 @@ class ImageConvert(object):
         return restored_original_image_list
 
     def get_rotated_image_sub_images_data(self, rotation_angle, image_name):
-        restored_original_image_list = self.create_original_image_from_sub_images_data_list(self.get_sub_images_data_list())
+        restored_original_image_list = \
+            self.__create_original_image_from_sub_images_data_list(self.get_sub_images_data_list())
         data = array(restored_original_image_list, dtype=uint8)
         img = toimage(data)
         rotated_img = img.rotate(rotation_angle)
@@ -111,21 +111,13 @@ class ImageConvert(object):
         other_converter = ImageConvert(rotated_image_path, self.__image_shape, self.__sub_image_shape, self.__image_mode)
         return other_converter.get_sub_images_data_list()
 
-    @staticmethod
-    def show_image_on_screen(restored_original_image_list):
-        data = array(restored_original_image_list, dtype=uint8)
+    def show_image_on_screen(self, image_data_after_nn_predict_list, file_path, show_image_flag=True):
+        data = array(self.__create_original_image_from_sub_images_data_list(image_data_after_nn_predict_list),
+                     dtype=uint8)
         img = toimage(data)
-        img.show()
+        img.save(file_path)
+        if show_image_flag:
+            img.show()
 
     def get_sub_images_data_list(self):
         return self.__sub_images_data_list
-
-#
-# def main():
-#     image_convert_obj = ImageConvert('Images\\Lena\\lena.png', (256, 256), (30, 30), 'L')
-#     sub_images_data_list = image_convert_obj.get_sub_images_data_list()
-#     original_image = image_convert_obj.create_original_image_from_sub_images_data_list(sub_images_data_list)
-#     image_convert_obj.show_image_on_screen(original_image)
-#     print()
-# if __name__ == "__main__":
-#     main()
