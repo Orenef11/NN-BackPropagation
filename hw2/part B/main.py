@@ -1,17 +1,14 @@
 from random import uniform
+from matplotlib.pylab import show
+from kohonen_algorithm.supporting_functions import calculate_distance
 from dataset.create_data import KohonenDataBase
+from kohonen_algorithm.kohonen_network import KohonenNetwork
 
 X_RANGE_BOUNDS = (0, 1)
 Y_RANGE_BOUNDS = (0, 1)
 CENTER = (0, 0)
-NUMBER_OF_POINTS = 4000
-
-
-def _calculate_distance(first_point, second_point):
-    raw_distance_value = 0
-    for first_point_parameter, second_point_parameter in zip(first_point, second_point):
-        raw_distance_value += (first_point_parameter - second_point_parameter) ** 2
-    return raw_distance_value ** 0.5
+NUMBER_OF_POINTS = 1000
+LEARNING_RATE = 0.3
 
 
 def choose_point_uniformly():
@@ -45,9 +42,11 @@ def draw_database_and_network(database, network):
 
 
 def main():
-    database = KohonenDataBase(choose_point_by_x, NUMBER_OF_POINTS)
+    database = KohonenDataBase(choose_point_uniformly, NUMBER_OF_POINTS)
     database.generate_data_points()
-    network = KohonenNetwork([3, 3])
+    network = KohonenNetwork([12, 12], LEARNING_RATE)
+    draw_database_and_network(database, network)
+    network.train_network(database)
     draw_database_and_network(database, network)
 
 if __name__ == '__main__':
