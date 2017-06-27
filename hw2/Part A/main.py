@@ -139,15 +139,12 @@ def main():
         print("FolderNotExistError: The '{}' does not exist".format(BEST_K_MODELS_FOLDER))
 
     if create_models_flag:
-        print("Sfsdfsff")
-        exit()
         neurons_output_size = 900
         learning_rate_list = [i / 10 for i in range(1, 11)]
         hidden_size_list = [i for i in range(1, 101)]
         create_nn_models_main(LENA_IMAGE_PATH, IMAGE_SHAPE, SUB_IMAGE_SHAPE, IMAGE_MODE, neurons_output_size,
                               learning_rate_list, hidden_size_list)
     if choosing_best_modules_flag:
-        print("aaaaaaaaaaaaaaaaaaaaa")
         best_k_models(MODELS_PICKLE_FOLDER, BEST_K_MODELS_FOLDER, best_k)
 
     if path.isdir(MODELS_PLOT):
