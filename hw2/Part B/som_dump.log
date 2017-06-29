@@ -1,58 +1,88 @@
-28/06/2017 07:30:16 PM	[main1.py main 67]  871 root [INFO ] 
+29/06/2017 12:54:07 AM	[main1.py main 62]  534 root [INFO ] 
 Create new folders
-28/06/2017 07:30:17 PM	[main1.py create_folders 47]  381 root [INFO ] 
+29/06/2017 12:54:07 AM	[main1.py create_folders 47]  535 root [INFO ] 
 Create 'Images from model' folder
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 92]  382 root [INFO ] 
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 97]  535 root [INFO ] 
 Creates a list of database object according to: 
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 93]  382 root [INFO ] 
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 98]  535 root [INFO ] 
 uniform, distance from x, distance from x, y, and circle.
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 15]  382 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 15]  535 root [DEBUG] 
 Create the database
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 19]  388 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 19]  537 root [DEBUG] 
 <DATABASE LOGGER> finished the database points generation
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 15]  390 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 15]  538 root [DEBUG] 
 Create the database
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 19]  398 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 19]  540 root [DEBUG] 
 <DATABASE LOGGER> finished the database points generation
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 15]  401 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 15]  540 root [DEBUG] 
 Create the database
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 19]  414 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 19]  544 root [DEBUG] 
 <DATABASE LOGGER> finished the database points generation
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 15]  417 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 15]  544 root [DEBUG] 
 Create the database
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 19]  420 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 19]  545 root [DEBUG] 
 <DATABASE LOGGER> finished the database points generation
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 15]  421 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 15]  546 root [DEBUG] 
 Create the database
-28/06/2017 07:30:17 PM	[create_dataset.py __generate_data_points 19]  424 root [DEBUG] 
+29/06/2017 12:54:07 AM	[create_dataset.py __generate_data_points 19]  549 root [DEBUG] 
 <DATABASE LOGGER> finished the database points generation
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 103]  424 root [INFO ] 
-Finish create sub-images, it took 0.0422291918003 seconds
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 104]  426 root [INFO ] 
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 109]  550 root [INFO ] 
+Finish create sub-images, it took 0.01536958929301313 seconds
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 110]  550 root [INFO ] 
 Create networks structure list
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 106]  426 root [INFO ] 
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 113]  550 root [INFO ] 
 Create networks structure list
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 109]  426 root [INFO ] 
-Finish create networks structure list, it took 0.0004838648839 seconds
-28/06/2017 07:30:17 PM	[create_many_som_models.py create_nn_models_main 111]  426 root [INFO ] 
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 116]  552 root [INFO ] 
+Finish create networks structure list, it took 0.002159305015437263 seconds
+29/06/2017 12:54:07 AM	[create_many_som_models.py create_nn_models_main 118]  553 root [INFO ] 
 Training all networks structure
-28/06/2017 07:30:19 PM	[kohonen_network.py train_network 142]  407 root [DEBUG] 
-Iteration number: 0
-28/06/2017 07:30:20 PM	[kohonen_network.py train_network 142]  933 root [DEBUG] 
-Iteration number: 5
-28/06/2017 07:30:22 PM	[kohonen_network.py train_network 142]  426 root [DEBUG] 
-Iteration number: 10
-28/06/2017 07:30:23 PM	[kohonen_network.py train_network 142]  910 root [DEBUG] 
-Iteration number: 15
-28/06/2017 07:30:25 PM	[kohonen_network.py train_network 142]  407 root [DEBUG] 
-Iteration number: 20
-28/06/2017 07:30:26 PM	[kohonen_network.py train_network 142]  892 root [DEBUG] 
-Iteration number: 25
-28/06/2017 07:30:28 PM	[kohonen_network.py train_network 142]  382 root [DEBUG] 
-Iteration number: 30
-28/06/2017 07:30:40 PM	[create_many_som_models.py create_nn_models_main 118]  572 root [INFO ] 
-Finish training, it took 0.385775851319 minutes
-28/06/2017 07:30:40 PM	[create_many_som_models.py create_nn_models_main 119]  572 root [INFO ] 
-The running time took 0.386492543328 minutes
-28/06/2017 07:30:40 PM	[main1.py main 72]  572 root [INFO ] 
-The running time of the program is 0.40338609058
+29/06/2017 01:16:58 AM	[create_many_som_models.py create_nn_models_main 121]  577 root [INFO ] 
+Finish training, it took 22.850406750528336 minutes
+29/06/2017 01:16:58 AM	[create_many_som_models.py create_nn_models_main 122]  577 root [INFO ] 
+The running time took 22.8507080659194 minutes
+29/06/2017 01:16:58 AM	[main1.py main 67]  577 root [INFO ] 
+The running time of the program is 22.859151384471925
+29/06/2017 01:40:38 AM	[main1.py main 62]  91 root [INFO ] 
+Create new folders
+29/06/2017 01:41:10 AM	[main1.py main 62]  749 root [INFO ] 
+Create new folders
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 98]  749 root [INFO ] 
+Creates a list of database object according to: 
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 99]  749 root [INFO ] 
+uniform, distance from x, distance from x, y, and circle.
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 15]  749 root [DEBUG] 
+Create the database
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 19]  751 root [DEBUG] 
+<DATABASE LOGGER> finished the database points generation
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 15]  751 root [DEBUG] 
+Create the database
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 19]  753 root [DEBUG] 
+<DATABASE LOGGER> finished the database points generation
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 15]  754 root [DEBUG] 
+Create the database
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 19]  757 root [DEBUG] 
+<DATABASE LOGGER> finished the database points generation
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 15]  758 root [DEBUG] 
+Create the database
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 19]  759 root [DEBUG] 
+<DATABASE LOGGER> finished the database points generation
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 15]  760 root [DEBUG] 
+Create the database
+29/06/2017 01:41:10 AM	[create_dataset.py __generate_data_points 19]  761 root [DEBUG] 
+<DATABASE LOGGER> finished the database points generation
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 110]  762 root [INFO ] 
+Finish create sub-images, it took 0.013026941225720958 seconds
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 111]  762 root [INFO ] 
+Create networks structure list
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 113]  762 root [INFO ] 
+Create networks structure list
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 116]  764 root [INFO ] 
+Finish create networks structure list, it took 0.002260406495971092 seconds
+29/06/2017 01:41:10 AM	[create_many_som_models.py create_nn_models_main 118]  764 root [INFO ] 
+Training all networks structure
+29/06/2017 02:48:53 AM	[create_many_som_models.py create_nn_models_main 121]  421 root [INFO ] 
+Finish training, it took 67.71095554606033 minutes
+29/06/2017 02:48:53 AM	[create_many_som_models.py create_nn_models_main 122]  422 root [INFO ] 
+The running time took 67.71121901280846 minutes
+29/06/2017 02:48:53 AM	[main1.py main 67]  422 root [INFO ] 
+The running time of the program is 67.71123313197546 minutes

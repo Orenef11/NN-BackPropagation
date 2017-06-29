@@ -22,6 +22,8 @@ def __create_networks_structure_list(image_convert_obj, neurons_output_size, lea
                                           hyperbolic_tangent_activation_function,
                                           hyperbolic_tangent_activation_function_derivative, file_count + 2])
             file_count += 3
+            break
+        break
 
     return tuple(models_structure_tuple)
 

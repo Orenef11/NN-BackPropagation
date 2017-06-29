@@ -18,14 +18,20 @@ CENTER = (0, 0)
 NUMBER_OF_POINTS = 1000
 
 
-def __create_networks_structure_list(learning_rates_list, databast_obj_list, network_dimensions, images_folder_path):
+def __create_networks_structure_list(learning_rates_list, databast_obj_list, images_folder_path, model_types_list):
     models_structure_tuple = []
-    file_count = 1
-    for learning_rate in learning_rates_list:
-        for database_obj in databast_obj_list:
-            models_structure_tuple.append((network_dimensions, database_obj, learning_rate, file_count,
-                                           images_folder_path))
-            file_count += 1
+    for model_type_and_dimensions in model_types_list:
+        model_type = model_type_and_dimensions[0]
+        network_dimensions = model_type_and_dimensions[1]
+        folder_path = path.join(images_folder_path, model_type)
+        makedirs(folder_path)
+        file_count = 1
+        for learning_rate in learning_rates_list:
+            for database_obj in databast_obj_list:
+                if not path.isdir(path.join(folder_path, str(file_count))):
+                    models_structure_tuple.append((model_type, network_dimensions, database_obj,
+                                                   learning_rate, file_count, folder_path))
+                file_count += 1
 
     return tuple(models_structure_tuple)
 
@@ -100,20 +106,17 @@ def create_nn_models_main(images_folder_path):
                          KohonenDataBase(choose_points_with_radius_of_two_annulus, NUMBER_OF_POINTS,
                                          'Data with radius of onr annulus')]
     finish_dataset_time = clock()
+    model_types_list = [('squares_net', (12, 12)), ('chain', 30), ('circle', 30)]
     logging.info('\nFinish create sub-images, it took {} seconds'.format(finish_dataset_time - start_time))
     logging.info('\nCreate networks structure list')
     learning_rates_list = [learning_rate / 100.0 for learning_rate in range(5, 31, 5)]
     logging.info('\nCreate networks structure list')
-    networks_structure_list = __create_networks_structure_list(learning_rates_list, databast_obj_list, (12, 12),
-                                                               images_folder_path)
+    networks_structure_list = __create_networks_structure_list(learning_rates_list, databast_obj_list,
+                                                               images_folder_path, model_types_list)
     logging.info('\nFinish create networks structure list, it took {} seconds'.format(clock() - finish_dataset_time))
     som_networks_training = clock()
     logging.info('\nTraining all networks structure')
-    networks_structure_list = networks_structure_list[:2]
-    KohonenNetwork(networks_structure_list[0])
-
     pool_processes = Pool(processes=cpu_count())
     pool_processes.map(KohonenNetwork, networks_structure_list)
-
     logging.info("\nFinish training, it took {} minutes".format((clock() - som_networks_training) / 60.0))
     logging.info("\nThe running time took {} minutes".format((clock() - start_time) / 60.0))

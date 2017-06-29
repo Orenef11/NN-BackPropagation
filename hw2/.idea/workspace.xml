@@ -12,11 +12,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main1.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main1.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Part B/main1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="64" column="18" lean-forward="true" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+            <state relative-caret-position="454">
+              <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
               <folding>
                 <element signature="e#15#71#0" expanded="true" />
               </folding>
@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create_many_som_models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="create_many_som_models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Part B/create_many_som_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="115" column="5" lean-forward="false" selection-start-line="114" selection-start-column="2" selection-end-line="115" selection-end-column="5" />
+            <state relative-caret-position="454">
+              <caret line="114" column="76" lean-forward="false" selection-start-line="114" selection-start-column="2" selection-end-line="115" selection-end-column="5" />
               <folding>
                 <element signature="e#15#57#0" expanded="true" />
               </folding>
@@ -39,11 +39,10 @@
       <file leaf-file-name="kohonen_network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Part B/kohonen_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1234">
+            <state relative-caret-position="1734">
               <caret line="107" column="13" lean-forward="false" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
               <folding>
                 <element signature="e#15#44#0" expanded="true" />
-                <element signature="e#241#1758#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -167,8 +166,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -215,6 +212,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -386,10 +385,9 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20845272" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21131805" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3257066" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3230148" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -403,6 +401,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -437,9 +436,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="15" lean-forward="false" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#23#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -474,7 +470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="668" column="4" lean-forward="false" selection-start-line="668" selection-start-column="4" selection-end-line="668" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -496,17 +491,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="119" column="12" lean-forward="false" selection-start-line="119" selection-start-column="12" selection-end-line="119" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-            <element signature="e#358#914#0" expanded="false" />
-            <element signature="e#978#1461#0" expanded="false" />
-            <element signature="e#1511#2424#0" expanded="false" />
-            <element signature="e#2544#2951#0" expanded="false" />
-            <element signature="e#3037#3399#0" expanded="false" />
-            <element signature="e#3496#4797#0" expanded="false" />
-            <element signature="e#4884#5546#0" expanded="false" />
-            <element signature="e#5952#5986#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -516,7 +500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="991" column="8" lean-forward="false" selection-start-line="991" selection-start-column="8" selection-end-line="991" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -524,9 +507,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="25" column="57" lean-forward="false" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
-          <folding>
-            <element signature="e#15#29#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -534,10 +514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="146" column="34" lean-forward="false" selection-start-line="146" selection-start-column="34" selection-end-line="146" selection-end-column="34" />
-          <folding>
-            <element signature="e#893#1180#0" expanded="false" />
-            <element signature="e#5525#6153#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -552,7 +528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="259" column="0" lean-forward="false" selection-start-line="259" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -560,7 +535,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="2830" column="8" lean-forward="false" selection-start-line="2830" selection-start-column="8" selection-end-line="2830" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -589,7 +563,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
           <caret line="207" column="5" lean-forward="false" selection-start-line="207" selection-start-column="2" selection-end-line="207" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -607,7 +580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-61">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -615,7 +587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="231" column="0" lean-forward="false" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -623,57 +594,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
           <caret line="566" column="0" lean-forward="false" selection-start-line="566" selection-start-column="0" selection-end-line="566" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/create_many_som_models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#57#0" expanded="true" />
-            <element signature="e#1337#1569#0" expanded="false" />
-            <element signature="e#2151#2574#0" expanded="false" />
-            <element signature="e#2639#3043#0" expanded="false" />
-            <element signature="e#3098#3291#0" expanded="false" />
-            <element signature="e#3346#3537#0" expanded="false" />
-            <element signature="e#3603#4470#0" expanded="false" />
-            <element signature="e#4534#5389#0" expanded="false" />
-            <element signature="e#5461#6210#0" expanded="false" />
-            <element signature="e#6578#6810#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/part B/2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/part B/4.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/part B/3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/part B/1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/create_many_som_models.py" />
+    <entry file="file://$PROJECT_DIR$/part B/2.png" />
+    <entry file="file://$PROJECT_DIR$/part B/4.png" />
+    <entry file="file://$PROJECT_DIR$/part B/3.png" />
+    <entry file="file://$PROJECT_DIR$/part B/1.png" />
     <entry file="file://$PROJECT_DIR$/Part B/create_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#45#0" expanded="true" />
-            <element signature="e#800#1273#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -681,95 +613,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/dataset.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/7.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/6.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/5.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/4.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/3.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/part B/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-177">
-          <caret line="20" column="36" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="20" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 2/1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 2/2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Part B/create_many_som_models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="115" column="5" lean-forward="false" selection-start-line="114" selection-start-column="2" selection-end-line="115" selection-end-column="5" />
-          <folding>
-            <element signature="e#15#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/dataset.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/7.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/6.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/5.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/4.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/3.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/2.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 1/1.png" />
+    <entry file="file://$PROJECT_DIR$/part B/main.py" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 2/1.png" />
+    <entry file="file://$PROJECT_DIR$/Part B/Images from model/model 2/2.png" />
     <entry file="file://$PROJECT_DIR$/Part B/kohonen_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1234">
+        <state relative-caret-position="1734">
           <caret line="107" column="13" lean-forward="false" selection-start-line="107" selection-start-column="13" selection-end-line="107" selection-end-column="13" />
           <folding>
             <element signature="e#15#44#0" expanded="true" />
-            <element signature="e#241#1758#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Part B/main1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="64" column="18" lean-forward="true" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+        <state relative-caret-position="454">
+          <caret line="64" column="18" lean-forward="false" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
           <folding>
             <element signature="e#15#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Part B/create_many_som_models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="114" column="76" lean-forward="false" selection-start-line="114" selection-start-column="2" selection-end-line="115" selection-end-column="5" />
+          <folding>
+            <element signature="e#15#57#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -53,53 +53,19 @@ def main():
     Using multi-processors to run parallel.
     Save for each model the images of network growth along with the dump file.
     """
-    # if len(argv) < 4:
-    #     print("The number of arguments entered is incorrect!")
-    #     print("Usage: Python hw1.py <create_models_flag> <choosing_best_modules_flag> <best_k_models_size>")
-    # create_models_flag = argv[1].lower() == 'true'
-    # choosing_best_modules_flag = argv[2].lower() == 'true'
-    # best_k = int(argv[3])
+
     start_time = clock()
-    if path.isfile('som_dump.log'):
-        remove('som_dump.log')
-        sleep(0.5)
+    # if path.isfile('som_dump.log'):
+    #     remove('som_dump.log')
+    #     sleep(0.5)
     setting_up_logger('debug', 'info', 'som_dump.log')
     logging.info("\nCreate new folders")
     create_models_flag = True
-    create_folders([MODEL_IMAGES_OUTPUT_FOLDER])
+    # create_folders([MODEL_IMAGES_OUTPUT_FOLDER])
     if create_models_flag:
         create_nn_models_main(MODEL_IMAGES_OUTPUT_FOLDER)
-    logging.info("\nThe running time of the program is {}".format((clock() - start_time) / 60.0))
+    logging.info("\nThe running time of the program is {} minutes".format((clock() - start_time) / 60.0))
 
-
-
-
-
-
-
-
-    # if create_models_flag:
-    #     print("Sfsdfsff")
-    #     exit()
-    #     neurons_output_size = 900
-    #     learning_rate_list = [i / 10 for i in range(1, 11)]
-    #     hidden_size_list = [i for i in range(1, 101)]
-    #     create_nn_models_main(LENA_IMAGE_PATH, IMAGE_SHAPE, SUB_IMAGE_SHAPE, IMAGE_MODE, neurons_output_size,
-    #                           learning_rate_list, hidden_size_list)
-    # if choosing_best_modules_flag:
-    #     print("aaaaaaaaaaaaaaaaaaaaa")
-    #     best_k_models(MODELS_PICKLE_FOLDER, BEST_K_MODELS_FOLDER, best_k)
-    #
-    # if path.isdir(MODELS_PLOT):
-    #     rmtree(MODELS_PLOT)
-    #     sleep(SLEEP_TIME)
-    # makedirs(MODELS_PLOT)
-    # if path.isdir(MODEL_IMAGES_OUTPUT_FOLDER):
-    #     rmtree(MODEL_IMAGES_OUTPUT_FOLDER)
-    #     sleep(SLEEP_TIME)
-    # makedirs(MODEL_IMAGES_OUTPUT_FOLDER)
-    #
-    # analysis_of_models(BEST_K_MODELS_FOLDER, MODEL_IMAGES_OUTPUT_FOLDER, IMAGES_FOLDER, MODELS_DUMPS_FILES)
 
 if __name__ == '__main__':
     main()
